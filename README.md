@@ -1,4 +1,6 @@
-## A simplified setup and workspace for using F1Tenth with ROS and Docker
+## F1Tenth ROS Setup
+
+A simplified setup and workspace for using F1Tenth with ROS and Docker.
 
 ### Prerequisites
 
