@@ -1,4 +1,4 @@
-## Guide for using F1Tenth with ROS and Docker
+## A simplified setup and workspace for using F1Tenth with ROS and Docker
 
 ### Prerequisites
 
