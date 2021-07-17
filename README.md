@@ -98,7 +98,22 @@ catkin_make
 source devel/setup.bash
 ```
 
-## Running other packages while the simulator is running
+## Making nodes launch whenever the Simulator launches
+
+Makes testing smoother, as you can run everything from one terminal. This is best shown with an example.
+
+In this case, you have created a package called `my_package` which contains a source file `driver.py`. To launch `driver.py` whenever the simulator launches, you would add the following line to the `simulator.launch` file:
+
+```launch
+<launch>
+...
+<node pkg="my_package" name="disparity_node" type="driver.py" output="screen"/>
+</launch>
+```
+
+Note that the `name` field corresponds to what you decide to name the node when initializing it using `rospy.init_node` in the `driver.py` file.
+
+## Running nodes seperately while the simulator is running
 
 Use the plus button in the Terminal window to add another terminal. 
 
