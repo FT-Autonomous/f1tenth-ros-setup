@@ -15,7 +15,7 @@ These steps should only have to be done once. Run the commands in the following 
 #### 1. Clone this repository
 
 ```
-git clone https://github.com/FT-Autonomous/f110-ros-setup.git
+git clone https://github.com/FT-Autonomous/f1tenth-ros-setup.git
 ```
 
 #### 2. Build the Docker Image
@@ -23,8 +23,8 @@ git clone https://github.com/FT-Autonomous/f110-ros-setup.git
 The build might take a while to load the first time you run it.
 
 ```
-cd f110-ros-setup
-docker build -t f110-ros .
+cd f1tenth-ros-setup
+docker build -t f1tenth-ros .
 ```
 
 #### 4. Run a Container
@@ -32,7 +32,7 @@ docker build -t f110-ros .
 This step will ensure the build has worked by running a container. Later we will run the simulator in this container.
 
 ```
-docker run -it f110-ros
+docker run -it f1tenth-ros
 ```
 
 You should see your terminal display something like
@@ -41,7 +41,7 @@ You should see your terminal display something like
 root@...:/#
 ```
 
-If it's all good, you may now exit the container by pressing CTRL+D. From now on we will be running this container from VSCode.
+You may now exit the container by pressing CTRL+D. From now on we will be running this container from VSCode.
 
 ## Running the Container in VSCode
 
@@ -53,18 +53,18 @@ Extensions (in Sidebar on left of screen) -> Search `Remote - Containers` -> Cli
 
 #### 2. Using Remote Explorer to attach to the container
 
-Remote Exporer (in Sidebar on left of screen) -> Ensure the dropdown at the top is set to `Containers` -> there should be an `f110-ros` container shown (hit refresh button if not) -> right-click `f110-ros` -> Attach to Container
+Remote Exporer (in Sidebar on left of screen) -> Ensure the dropdown at the top is set to `Containers` -> there should be an `f1tenth-ros` container shown (hit refresh button if not) -> right-click `f1tenth-ros` -> Attach to Container
 
 
 This will start the container we made previously and then attach to it (allow us to edit code and run commands), opening it in a new window.
 
 #### 3. Opening the Workspace
 
-After the previous step, you should see an `Open Folder` button. Click it and type the path `/f110/f110_workspace/`.
+After the previous step, you should see an `Open Folder` button. Click it and type the path `/f1tenth/f1tenth_workspace/`.
 
 It may take a few seconds to load.
 
-You should see a `src` folder. This holds the `f110_simulator` package and will also be the place we create our own packages.
+You should see a `src` folder. This holds the `f1tenth_simulator` package and will also be the place we create our own packages.
 
 You should open a terminal now, as we will need at least one to run the simulator and our code: Terminal (top taskbar) -> New Terminal.
 
@@ -93,7 +93,7 @@ Clone your package into the `src` directory. If you are in FTA, you will clone t
 Ensure you do a build of the workspace after you add a package so that ROS can find it:
 
 ```
-cd /f110/f110_workspace
+cd /f1tenth/f1tenth_workspace
 catkin_make
 source devel/setup.bash
 ```
@@ -126,7 +126,7 @@ source /utils/ros-init.sh
 Ensure you are using the environment created when the workspace was last built
 
 ```
-source /f110/f110_workspace/devel/setup.bash
+source /f1tenth/f1tenth_workspace/devel/setup.bash
 ```
 
 Run a file in your package

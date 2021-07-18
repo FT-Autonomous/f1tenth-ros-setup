@@ -9,13 +9,11 @@ RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 # initialise ROS, pull useful scripts from our repo and clone the F1Tenth simulator into a new catkin workspace
 RUN source /ros_entrypoint.sh && \
     source /opt/ros/melodic/setup.bash && \
-    mkdir f110 && \
-    cd f110 && \
+    mkdir f1tenth && \
+    cd f1tenth && \
     git clone https://github.com/FT-Autonomous/f1tenth-ros-setup.git && \
     mv f1tenth-ros-setup/utils /utils && \
     rm -rf f1tenth-ros-setup && \
-    mkdir f110_workspace && \
-    cd f110_workspace && \
-    git clone https://github.com/f1tenth/f110_ros.git src
-# remove extra skeleton code included in f110_ros repo
-RUN find /f110/f110_workspace/src -mindepth 1 ! -regex '^/f110/f110_workspace/src/f110_simulator\(/.*\)?' -delete
+    mkdir -p f1tenth_workspace/src && \
+    cd f1tenth_workspace/src && \
+    git clone https://github.com/f1tenth/f1tenth_simulator.git
