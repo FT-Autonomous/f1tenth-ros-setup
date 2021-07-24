@@ -1,0 +1,12 @@
+name: Automated build
+
+on:
+  push:
+    branches:
+      "**"
+
+jobs:
+  build-image:
+    steps:
+      - uses: actions/checkout@v1
+      - run: docker build .
