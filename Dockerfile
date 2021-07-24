@@ -16,4 +16,8 @@ RUN source /ros_entrypoint.sh && \
     rm -rf f1tenth-ros-setup && \
     mkdir -p f1tenth_workspace/src && \
     cd f1tenth_workspace/src && \
-    git clone https://github.com/f1tenth/f1tenth_simulator.git
+    git clone https://github.com/f1tenth/f1tenth_simulator.git && \
+    cd f1tenth_simulator/maps && \
+    git init && \
+    git remote add racetracks https://github.com/f1tenth/f1tenth_racetracks && \
+    git pull racetracks main
