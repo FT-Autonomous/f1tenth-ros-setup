@@ -1,9 +1,9 @@
-name: Automated build
+name: Automated build on change to Dockerfile
 
 on:
   push:
-    branches:
-      "**"
+    paths:
+      - 'Dockerfile'
 
 jobs:
   build-image:
