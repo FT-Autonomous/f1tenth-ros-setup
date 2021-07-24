@@ -2,7 +2,7 @@
 FROM ros:melodic-robot-bionic
 
 # install dependencies for the F1Tenth simulator and wget (and now pip)
-RUN apt-get update && apt-get install -y python3-pip
+RUN sudo apt-get update
 RUN pip3 install -U pip
 
 RUN sudo apt-get -y install ros-melodic-ackermann-msgs ros-melodic-tf2-geometry-msgs ros-melodic-interactive-markers ros-melodic-cv-bridge ros-melodic-image-transport ros-melodic-rviz ros-melodic-joy ros-melodic-map-server wget vim python3-pip
