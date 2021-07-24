@@ -1,0 +1,13 @@
+name: Automated build on change to Dockerfile
+
+on:
+  push:
+    paths:
+      - 'Dockerfile'
+
+jobs:
+  build-image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - run: docker build .
