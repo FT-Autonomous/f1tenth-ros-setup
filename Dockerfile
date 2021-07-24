@@ -1,8 +1,10 @@
 # pull container from https://hub.docker.com/_/ros, choosing the melodic-robot-bionic version
 FROM ros:melodic-robot-bionic
 
-# install dependencies for the F1Tenth simulator and wget
-RUN sudo apt-get update
+# install dependencies for the F1Tenth simulator and wget (and now pip)
+RUN apt-get update && apt-get install -y python3-pip
+RUN pip3 install -U pip
+
 RUN sudo apt-get -y install ros-melodic-ackermann-msgs ros-melodic-tf2-geometry-msgs ros-melodic-interactive-markers ros-melodic-cv-bridge ros-melodic-image-transport ros-melodic-rviz ros-melodic-joy ros-melodic-map-server wget vim
 # switch to bash for running commands
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
