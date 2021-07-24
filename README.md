@@ -86,6 +86,14 @@ source /utils/run-simulator.sh
 
 If you don't have display access set up yet you will see something like `[rviz-X] process has died...`. Don't worry, the simulator is still running, it just has no display output. See the end of this README to set up display access.
 
+## Choosing a racetrack
+
+All of the racetracks in the [F1Tenth Racetracks Repo](https://github.com/f1tenth/f1tenth_racetracks) can be used in the simulator. To choose a racetrack, you add the name of the track as a parameter in the `run-simulator` command, e.g. to run the simulator using Silverstone as the racetrack:
+
+```
+source /utils/run-simulator.sh Silverstone
+```
+
 ## Adding your own packages
 
 Clone your package into the `src` directory. If you are in FTA, you will clone the [FTA F1Tenth Driver](https://github.com/FT-Autonomous/fta_f1tenth_driver.git) in here.
