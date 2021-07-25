@@ -60,7 +60,7 @@ This will start the container we made previously and then attach to it (allow us
 
 #### 3. Opening the Workspace
 
-After the previous step, you should see an `Open Folder` button. Click it and type the path `/f1tenth/f1tenth_workspace/`.
+After the previous step, you should see an `Open Folder` button. Click it and type the path `/f1tenth_workspace/`.
 
 It may take a few seconds to load.
 
@@ -101,7 +101,7 @@ Clone your package into the `src` directory. If you are in FTA, you will clone t
 Ensure you do a build of the workspace after you add a package so that ROS can find it:
 
 ```
-cd /f1tenth/f1tenth_workspace
+cd /f1tenth_workspace
 catkin_make
 source devel/setup.bash
 ```
@@ -134,7 +134,7 @@ source /utils/ros-init.sh
 Ensure you are using the environment created when the workspace was last built
 
 ```
-source /f1tenth/f1tenth_workspace/devel/setup.bash
+source /f1tenth_workspace/devel/setup.bash
 ```
 
 Run a file in your package
