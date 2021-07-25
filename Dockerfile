@@ -9,8 +9,6 @@ RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 # initialise ROS, pull useful scripts from our repo and clone the F1Tenth simulator into a new catkin workspace
 RUN source /ros_entrypoint.sh && \
     source /opt/ros/melodic/setup.bash && \
-    mkdir f1tenth && \
-    cd f1tenth && \
     git clone https://github.com/FT-Autonomous/f1tenth-ros-setup.git && \
     mv f1tenth-ros-setup/utils /utils && \
     rm -rf f1tenth-ros-setup && \
