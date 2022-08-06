@@ -202,3 +202,7 @@ docker compose run -p 6080:6080 sh setup.sh
 ```
 
 Then open `localhost:6080` in your browser.
+
+Use `Alt+Shift+Enter` to open the terminal.
+
+Type in `source /utils/run-simulator.sh Silverstone`
