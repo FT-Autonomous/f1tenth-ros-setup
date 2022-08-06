@@ -198,7 +198,7 @@ chmod +x <filepath>
 ## Enabling the container to display GUIs on the host machine
 
 ```
-docker compose run -p 6080:6080 f1tenth-ros sh setup.sh
+docker compose run -p 5900:5900 f1tenth-ros sh setup.sh
 ```
 
 Then open `localhost:6080/vnc.html` in your browser.
@@ -207,9 +207,21 @@ Then open `localhost:6080/vnc.html` in your browser.
 
 Open a terminal and then type in `source /utils/run-simulator.sh Silverstone`.
 
-You may experience problems when running the sim in a browser, such as modifier keys not being captured properly, you can install a dedicated VNC client.
-On linux, you can use remmina.
-MacOS has a built in VNC client which you can use in the terminal via `open vnc://ADDRESS:PORT`.
+### VNC 
+Make sure to use a VNC client in order to run the sim.
+
+#### MacOS
+A VNC client exists which you can use in the terminal via `open vnc://ADDRESS:PORT`.
+
+#### Linux
+A VNC client can be installed called remmina
+    * [Debian based](https://remmina.org/how-to-install-remmina/)
+        * It is not found in the apt repository but you can use snap/flatpaks or adding it to the apt repository
+    * Arch based
+        * `sudo pacman -S remmina libvncserver` 
+    * [Gentoo based](https://wiki.gentoo.org/wiki/USE_flag) (see more on how to use use flags)
+        * Make sure to update USE flag for package to include the `vnc` USE Flag
+        * `sudo emerge net-misc/remmina net-libs/libvncserver`
 
 Once you have installed a VNC client, run:
 
@@ -218,3 +230,6 @@ docker compose run -p 5900:5900 f1tenth-ros sh setup.sh
 ```
 
 Then, in your VNC client, connect to `localhost:5900`.
+
+On Remmina if some keystrokes are not captured such as modifier keys like shift/ctrl/alt. Make sure to turn on `Grab all keyboard events` on the left hand side.
+You can also activate it by pressing `Control_R`
