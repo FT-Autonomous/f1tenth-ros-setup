@@ -193,7 +193,9 @@ chmod +x <filepath>
 
 * Having multiple terminals open can get confusing, luckily in VSCode you can rename each terminal to something more convenient: Right-click terminal name -> rename.
 
-## Enabling the container to display GUIs on the host machine (Windows)
+## Enabling the container to display GUIs on the host machine
+
+### Windows
 
 Prerequisite: Chocolatey must be installed on your computer.
 
@@ -231,10 +233,28 @@ source /utils/set-display.sh <Local IP Address>
 
 Now when you run the simulator you should see the display open in a new window.
 
-### Enabling the Container to display GUIs on the host machine (Ubuntu, and other)
+### Ubuntu
 
-First, install [Rocker](https://github.com/osrf/rocker), then after you have built your image (step 3), run the following command in your Terminal to run the Docker image:
+Run this command on the host to give yourself display permissions
 
+```shell
+xhost +si:localuser:root
 ```
-rocker [optional: --nvidia or --devices /dev/dri/card0] --x11 docker-ros
+
+Check what the DISPLAY environment variable is set to on the host. Will probably be something like `:11.0`
+
+```shell
+echo $DISPLAY
 ```
+
+To allow visual output, set the same environment variable in your container
+
+```shell
+export DISPLAY=<VALUE-ON-HOST>
+```
+
+To learn more about this voodoo, see [what is the $DISPLAY environment variable?](https://askubuntu.com/questions/432255/what-is-the-display-environment-variable)
+
+### Mac
+
+Unfortunately we have not yet found a stable way to display `rviz` on a Mac host. We would really appreciate if someone could contribute a solution!
