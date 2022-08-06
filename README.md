@@ -215,4 +215,4 @@ Then open `localhost:6080/vnc.html` in your browser.
 | `Win/Command+k`           | changes focus to application on the top                    |
 | `Win/Command+Enter`       | move application to main focus                             |
 
-Type in `source /utils/run-simulator.sh Silverstone`
+Open a terminal and then type in `source /utils/run-simulator.sh Silverstone`.
