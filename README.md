@@ -7,6 +7,7 @@ A simplified setup and workspace for using F1Tenth with ROS and Docker.
 ### Windows/Mac
 * [git](https://www.atlassian.com/git/tutorials/install-git)
 * [Docker Desktop](https://www.docker.com/products/docker-desktop)
+* [Docker Compose](https://docs.docker.com/compose/install/)
 
 ### Editor 
 * [Visual Studio Code](https://www.toolsqa.com/blogs/install-visual-studio-code/) (unless you have some other preference)
@@ -26,11 +27,12 @@ A simplified setup and workspace for using F1Tenth with ROS and Docker.
     
 * [Docker](https://www.docker.com/products/docker-desktop) 
     * [Debian based](https://docs.docker.com/engine/install/ubuntu/)
+        * See [here](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-20-04) for instructions on how to install docker compose on ubuntu.
     * [Arch based](https://wiki.archlinux.org/title/Docker) 
         * `sudo pacman -S yay base-devel`
-        * `yay -S docker-git`
+        * `yay -S docker-git docker-compose`
     * [Gentoo based](https://wiki.gentoo.org/wiki/Docker) 
-        * `sudo emerge app-containers/docker app-containers/docker-cli`
+        * `sudo emerge app-containers/docker app-containers/docker-cli app-containers/docker-compose`
 
 #### Systemd based - Debian/Arch etc
 * `sudo systemctl enable docker`
@@ -62,7 +64,7 @@ The build might take a while to load the first time you run it.
 
 ```
 cd f1tenth-ros-setup
-docker build -t f1tenth-ros .
+docker compose build
 ```
 
 #### 4. Run a Container
@@ -70,7 +72,7 @@ docker build -t f1tenth-ros .
 This step will ensure the build has worked by running a container. Later we will run the simulator in this container.
 
 ```
-docker run -it f1tenth-ros
+docker compose run f1tenth-ros
 ```
 
 You should see your terminal display something like
@@ -193,48 +195,26 @@ chmod +x <filepath>
 
 * Having multiple terminals open can get confusing, luckily in VSCode you can rename each terminal to something more convenient: Right-click terminal name -> rename.
 
-## Enabling the container to display GUIs on the host machine (Windows)
-
-Prerequisite: Chocolatey must be installed on your computer.
-
-Warning: Some firewalls may block access so it might be necessary to disable your firewall when running the simulator.
-
-Open Windows Powershell as Administrator and install the `xming` package
+## Enabling the container to display GUIs on the host machine
 
 ```
-choco install xming
+docker compose run -p 6080:6080 f1tenth-ros sh setup.sh
 ```
 
-Open the XLaunch Application
+Then open `localhost:6080/vnc.html` in your browser.
 
-<img src="https://i.imgur.com/q6bDsQV.jpg" width="300">
+[DWM Keybindings](https://github.com/FT-Autonomous/dwm) (keybindings for general use in the docker container)
 
-Follow the default settings for each step except the following
+Open a terminal and then type in `source /utils/run-simulator.sh Silverstone`.
 
-<img src="https://i.imgur.com/zn3YArf.jpg" width="400">
+You may experience problems when running the sim in a browser, such as modifier keys not being captured properly, you can install a dedicated VNC client.
+On linux, you can use remmina.
+MacOS has a built in VNC client which you can use in the terminal via `open vnc://ADDRESS:PORT`.
 
-Once the XLaunch setup is finished, find your local IP Address by entering an ipconfig command in your local terminal
-
-```
-ipconfig
-```
-
-Your local IP should be found similarly to where its shown below (ignore the white marks)
-
-<img src="https://i.imgur.com/JsNgYMO.jpg" width="400">
-
-Execute the setup-display script in the container passing your local IP Address as a parameter.
+Once you have installed a VNC client, run:
 
 ```
-source /utils/set-display.sh <Local IP Address>
+docker compose run -p 5900:5900 f1tenth-ros sh setup.sh
 ```
 
-Now when you run the simulator you should see the display open in a new window.
-
-### Enabling the Container to display GUIs on the host machine (Ubuntu, and other)
-
-First, install [Rocker](https://github.com/osrf/rocker), then after you have built your image (step 3), run the following command in your Terminal to run the Docker image:
-
-```
-rocker [optional: --nvidia or --devices /dev/dri/card0] --x11 docker-ros
-```
+Then, in your VNC client, connect to `localhost:5900`.
