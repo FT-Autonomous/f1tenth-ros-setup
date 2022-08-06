@@ -10,8 +10,6 @@ RUN sudo apt install -y ros-melodic-ackermann-msgs ros-melodic-tf2-geometry-msgs
 # mightn't be necessary
 RUN pip3 install -U pip
 
-EXPOSE 5900
-
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 # initialise ROS, pull useful scripts from our repo and clone the F1Tenth simulator into a new catkin workspace
 RUN source /ros_entrypoint.sh && \
