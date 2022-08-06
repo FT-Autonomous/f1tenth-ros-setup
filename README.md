@@ -203,16 +203,6 @@ docker compose run -p 6080:6080 f1tenth-ros sh setup.sh
 
 Then open `localhost:6080/vnc.html` in your browser.
 
-
-| Commands                  | Action                                                     |   
-|:--------------------------|:-----------------------------------------------------------| 
-| `Win/Command+Shift+Enter` | to open the terminal.                                      |
-| `Win/Command+Shift+c`     | close applications                                         |
-| `Win/Command+NUM`         | changes tags (where NUM is any number)                     |
-| `Win/Command+Shift+NUM`   | move application to tag (broken slightly for tags 2 and 3) |
-| `Win/Command+Shift+NUM`   | move application to tag                                    |
-| `Win/Command+j`           | changes focus to application on the bottom                 |
-| `Win/Command+k`           | changes focus to application on the top                    |
-| `Win/Command+Enter`       | move application to main focus                             |
+[DWM Keybinding](https://github.com/FT-Autonomous/dwm) (keybindings for general use in the docker container)
 
 Open a terminal and then type in `source /utils/run-simulator.sh Silverstone`.
