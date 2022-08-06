@@ -4,9 +4,47 @@ A simplified setup and workspace for using F1Tenth with ROS and Docker.
 
 ## Prerequisites
 
+### Windows/Mac
 * [git](https://www.atlassian.com/git/tutorials/install-git)
 * [Docker Desktop](https://www.docker.com/products/docker-desktop)
+
+### Editor 
 * [Visual Studio Code](https://www.toolsqa.com/blogs/install-visual-studio-code/) (unless you have some other preference)
+
+### Linux
+* Make sure to sync packages before installing new packages
+* [git](https://www.atlassian.com/git/tutorials/install-git)
+    * Debian based
+        * `sudo apt update` (syncing packages)
+        * `sudo apt install git`
+    * Arch based
+        * `sudo pacman -Sy` (syncing packages)
+        * `sudo pacman -S git` 
+    * Gentoo based
+        * `sudo emerge --sync` (syncing packages)
+        * `sudo emerge git`
+    
+* [Docker](https://www.docker.com/products/docker-desktop) 
+    * [Debian based](https://docs.docker.com/engine/install/ubuntu/)
+    * [Arch based](https://wiki.archlinux.org/title/Docker) 
+        * `sudo pacman -S yay base-devel`
+        * `yay -S docker-git`
+    * [Gentoo based](https://wiki.gentoo.org/wiki/Docker) 
+        * `sudo emerge app-containers/docker app-containers/docker-cli`
+
+#### Systemd based - Debian/Arch etc
+* `sudo systemctl enable docker`
+* `sudo systemctl start docker`
+
+#### Init Systems 
+
+##### OpenRC - Gentoo
+* `sudo rc-update add docker`
+* `sudo rc-service docker start`
+* If encountering a crash from docker, manually solve it by `sudo rc-service docker zap`
+
+#### User permisions
+* `sudo usermod -aG docker <username>` 
 
 ## Building the Docker Image and making a Container
 
