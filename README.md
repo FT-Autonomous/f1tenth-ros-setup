@@ -62,7 +62,7 @@ The build might take a while to load the first time you run it.
 
 ```
 cd f1tenth-ros-setup
-docker build -t f1tenth-ros .
+docker compose build
 ```
 
 #### 4. Run a Container
@@ -70,7 +70,7 @@ docker build -t f1tenth-ros .
 This step will ensure the build has worked by running a container. Later we will run the simulator in this container.
 
 ```
-docker run -it f1tenth-ros
+docker compse run f1tenth-ros
 ```
 
 You should see your terminal display something like
@@ -195,46 +195,8 @@ chmod +x <filepath>
 
 ## Enabling the container to display GUIs on the host machine (Windows)
 
-Prerequisite: Chocolatey must be installed on your computer.
-
-Warning: Some firewalls may block access so it might be necessary to disable your firewall when running the simulator.
-
-Open Windows Powershell as Administrator and install the `xming` package
-
 ```
-choco install xming
+docker compose run -p 6080:6080 sh setup.sh
 ```
 
-Open the XLaunch Application
-
-<img src="https://i.imgur.com/q6bDsQV.jpg" width="300">
-
-Follow the default settings for each step except the following
-
-<img src="https://i.imgur.com/zn3YArf.jpg" width="400">
-
-Once the XLaunch setup is finished, find your local IP Address by entering an ipconfig command in your local terminal
-
-```
-ipconfig
-```
-
-Your local IP should be found similarly to where its shown below (ignore the white marks)
-
-<img src="https://i.imgur.com/JsNgYMO.jpg" width="400">
-
-Execute the setup-display script in the container passing your local IP Address as a parameter.
-
-```
-source /utils/set-display.sh <Local IP Address>
-```
-
-Now when you run the simulator you should see the display open in a new window.
-
-### Enabling the Container to display GUIs on the host machine (Ubuntu, and other)
-
-First, install [Rocker](https://github.com/osrf/rocker), then after you have built your image (step 3), run the following command in your Terminal to run the Docker image:
-
-```
-rocker [optional: --nvidia or --devices /dev/dri/card0] --x11 docker-ros
-```
+Then open `localhost:6080` in your browser.
