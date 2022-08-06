@@ -12,8 +12,8 @@ RUN pip3 install -U pip
 
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 # initialise ROS, pull useful scripts from our repo and clone the F1Tenth simulator into a new catkin workspace
-RUN git clone https://git.suckless.org/st/ && cd st && make install
-RUN git clone https://github.com/FT-Autonomous/dwm && cd dwm && make install
+RUN git clone https://git.suckless.org/st/ && cd st && make clean install
+RUN git clone https://github.com/FT-Autonomous/dwm && cd dwm && make clean install
 
 RUN source /ros_entrypoint.sh && \
     git clone https://github.com/novnc/noVNC.git /noVNC && \
