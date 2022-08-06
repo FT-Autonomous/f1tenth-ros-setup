@@ -203,12 +203,11 @@ docker compose run -p 6080:6080 f1tenth-ros sh setup.sh
 
 Then open `localhost:6080/vnc.html` in your browser.
 
-[DWM Keybinding](https://github.com/FT-Autonomous/dwm) (keybindings for general use in the docker container)
+[DWM Keybindings](https://github.com/FT-Autonomous/dwm) (keybindings for general use in the docker container)
 
 Open a terminal and then type in `source /utils/run-simulator.sh Silverstone`.
 
-You may experience problems when running the sim in a browser, such as modifier keys not being captured properlies.
-If this is the case, you can install a dedicated VNC client.
+You may experience problems when running the sim in a browser, such as modifier keys not being captured properly, you can install a dedicated VNC client.
 On linux, you can use remmina.
 MacOS has a built in VNC client which you can use in the terminal via `open vnc://ADDRESS:PORT`.
 
