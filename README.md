@@ -207,21 +207,21 @@ Then open `localhost:6080/vnc.html` in your browser.
 
 Open a terminal and then type in `source /utils/run-simulator.sh Silverstone`.
 
-### VNC 
+## VNC 
 Make sure to use a VNC client in order to run the sim.
 
-#### MacOS
+### MacOS
 A VNC client exists which you can use in the terminal via `open vnc://ADDRESS:PORT`.
 
-#### Linux
+### Linux
 A VNC client can be installed called remmina
-    * [Debian based](https://remmina.org/how-to-install-remmina/)
-        * It is not found in the apt repository but you can use snap/flatpaks or adding it to the apt repository
-    * Arch based
-        * `sudo pacman -S remmina libvncserver` 
-    * [Gentoo based](https://wiki.gentoo.org/wiki/USE_flag) (see more on how to use use flags)
-        * Make sure to update USE flag for package to include the `vnc` USE Flag
-        * `sudo emerge net-misc/remmina net-libs/libvncserver`
+   * [Debian based](https://remmina.org/how-to-install-remmina/)
+      * It is not found in the apt repository but you can use snap/flatpaks or adding it to the apt repository
+   * Arch based
+       * `sudo pacman -S remmina libvncserver` 
+   * [Gentoo based](https://wiki.gentoo.org/wiki/USE_flag) (see more on how to use use flags)
+       * Make sure to update USE flag for package to include the `vnc` USE Flag
+       * `sudo emerge net-misc/remmina net-libs/libvncserver`
 
 Once you have installed a VNC client, run:
 
