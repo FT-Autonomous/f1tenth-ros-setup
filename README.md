@@ -28,7 +28,7 @@ A simplified setup and workspace for using F1Tenth with ROS and Docker.
     * [Debian based](https://docs.docker.com/engine/install/ubuntu/)
     * [Arch based](https://wiki.archlinux.org/title/Docker) 
         * `sudo pacman -S yay base-devel`
-        * `sudo yay -S docker-git`
+        * `yay -S docker-git`
     * [Gentoo based](https://wiki.gentoo.org/wiki/Docker) 
         * `sudo emerge app-containers/docker app-containers/docker-cli`
 
