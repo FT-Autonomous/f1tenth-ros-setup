@@ -7,6 +7,7 @@ A simplified setup and workspace for using F1Tenth with ROS and Docker.
 ### Windows/Mac
 * [git](https://www.atlassian.com/git/tutorials/install-git)
 * [Docker Desktop](https://www.docker.com/products/docker-desktop)
+* [Docker Compose](https://docs.docker.com/compose/install/)
 
 ### Editor 
 * [Visual Studio Code](https://www.toolsqa.com/blogs/install-visual-studio-code/) (unless you have some other preference)
@@ -26,11 +27,12 @@ A simplified setup and workspace for using F1Tenth with ROS and Docker.
     
 * [Docker](https://www.docker.com/products/docker-desktop) 
     * [Debian based](https://docs.docker.com/engine/install/ubuntu/)
+        * See [here](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-20-04) for instructions on how to install docker compose on ubuntu.
     * [Arch based](https://wiki.archlinux.org/title/Docker) 
         * `sudo pacman -S yay base-devel`
-        * `yay -S docker-git`
+        * `yay -S docker-git docker-compose`
     * [Gentoo based](https://wiki.gentoo.org/wiki/Docker) 
-        * `sudo emerge app-containers/docker app-containers/docker-cli`
+        * `sudo emerge app-containers/docker app-containers/docker-cli app-containers/docker-compose`
 
 #### Systemd based - Debian/Arch etc
 * `sudo systemctl enable docker`
