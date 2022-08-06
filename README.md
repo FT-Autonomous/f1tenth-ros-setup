@@ -72,7 +72,7 @@ docker compose build
 This step will ensure the build has worked by running a container. Later we will run the simulator in this container.
 
 ```
-docker compse run f1tenth-ros
+docker compose run f1tenth-ros
 ```
 
 You should see your terminal display something like
