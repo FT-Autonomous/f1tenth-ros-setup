@@ -195,13 +195,13 @@ chmod +x <filepath>
 
 * Having multiple terminals open can get confusing, luckily in VSCode you can rename each terminal to something more convenient: Right-click terminal name -> rename.
 
-## Enabling the container to display GUIs on the host machine (Windows)
+## Enabling the container to display GUIs on the host machine
 
 ```
-docker compose run -p 6080:6080 sh setup.sh
+docker compose run -p 6080:6080 f1tenth-ros sh setup.sh
 ```
 
-Then open `localhost:6080` in your browser.
+Then open `localhost:6080/vnc.html` in your browser.
 
 Use `Alt+Shift+Enter` to open the terminal.
 
