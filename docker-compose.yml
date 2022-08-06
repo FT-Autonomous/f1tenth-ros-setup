@@ -7,8 +7,6 @@ services:
       dockerfile: Dockerfile
     stdin_open: true
     volumes:
-      - ./compose/vnc/dwm:/usr/bin/dwm
-      - ./compose/vnc/st:/usr/bin/st
       - ./compose/vnc/setup.sh:/setup.sh
     expose: [5900]
     ports:

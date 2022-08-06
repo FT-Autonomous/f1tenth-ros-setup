@@ -4,7 +4,7 @@ FROM ros:melodic-robot-bionic
 # install dependencies for the F1Tenth simulator and wget (and now pip)
 RUN sudo apt update
 
-RUN sudo apt install -y ros-melodic-ackermann-msgs ros-melodic-tf2-geometry-msgs ros-melodic-interactive-markers ros-melodic-cv-bridge ros-melodic-image-transport ros-melodic-rviz ros-melodic-joy ros-melodic-map-server wget neovim python3-pip netcat x11vnc xvfb
+RUN sudo apt install -y ros-melodic-ackermann-msgs ros-melodic-tf2-geometry-msgs ros-melodic-interactive-markers ros-melodic-cv-bridge ros-melodic-image-transport ros-melodic-rviz ros-melodic-joy ros-melodic-map-server wget neovim python3-pip netcat x11vnc xvfb xorg-dev
 # switch to bash for running commands
 
 # mightn't be necessary
@@ -12,6 +12,9 @@ RUN pip3 install -U pip
 
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 # initialise ROS, pull useful scripts from our repo and clone the F1Tenth simulator into a new catkin workspace
+RUN git clone https://git.suckless.org/st/ && cd st && make install
+RUN git clone https://github.com/FT-Autonomous/dwm && cd dwm && make install
+
 RUN source /ros_entrypoint.sh && \
     git clone https://github.com/novnc/noVNC.git /noVNC && \
     source /opt/ros/melodic/setup.bash && \
