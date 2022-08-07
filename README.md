@@ -5,14 +5,17 @@ A simplified setup and workspace for using F1Tenth with ROS and Docker.
 ## Prerequisites
 
 ### Windows/Mac
+
 * [git](https://www.atlassian.com/git/tutorials/install-git)
 * [Docker Desktop](https://www.docker.com/products/docker-desktop)
 * [Docker Compose](https://docs.docker.com/compose/install/)
 
 ### Editor 
+
 * [Visual Studio Code](https://www.toolsqa.com/blogs/install-visual-studio-code/) (unless you have some other preference)
 
 ### Linux
+
 * Make sure to sync packages before installing new packages
 * [git](https://www.atlassian.com/git/tutorials/install-git)
     * Debian based
@@ -195,26 +198,27 @@ chmod +x <filepath>
 
 * Having multiple terminals open can get confusing, luckily in VSCode you can rename each terminal to something more convenient: Right-click terminal name -> rename.
 
-## Enabling the container to display GUIs on the host machine
+## Using the GUI within the Docker Container via VNC
+
+First, run the container with the VNC ports exposed.
 
 ```
-docker compose run -p 5900:5900 f1tenth-ros sh setup.sh
+docker compose run -p 5900:5900 -p 6080:6080 f1tenth-ros sh setup.sh
 ```
 
-Then open `localhost:6080/vnc.html` in your browser.
+### Connecting to the Docker Container Using a VNC Client
 
-[DWM Keybindings](https://github.com/FT-Autonomous/dwm) (keybindings for general use in the docker container)
+There is a universal method, though you will have a better experience using a dedicated VNC client.
 
-Open a terminal and then type in `source /utils/run-simulator.sh Silverstone`.
+#### MacOS
 
-## VNC 
-Make sure to use a VNC client in order to run the sim.
+MacOS comes with a built in VNC client.
+Once the docker container is running, you can open it using `open vnc://localhost:5900`.
 
-### MacOS
-A VNC client exists which you can use in the terminal via `open vnc://ADDRESS:PORT`.
+#### Linux
 
-### Linux
-A VNC client can be installed called remmina
+A VNC client can be installed called remmina:
+
    * [Debian based](https://remmina.org/how-to-install-remmina/)
       * It is not found in the apt repository but you can use snap/flatpaks or adding it to the apt repository
    * Arch based
@@ -223,13 +227,20 @@ A VNC client can be installed called remmina
        * Make sure to update USE flag for package to include the `vnc` USE Flag
        * `sudo emerge net-misc/remmina net-libs/libvncserver`
 
-Once you have installed a VNC client, run:
+Create a new connection to `localhost:5900` using the VNC plugin.
 
-```
-docker compose run -p 5900:5900 f1tenth-ros sh setup.sh
-```
-
-Then, in your VNC client, connect to `localhost:5900`.
-
-On Remmina if some keystrokes are not captured such as modifier keys like shift/ctrl/alt. Make sure to turn on `Grab all keyboard events` on the left hand side.
+On Remmina if some keystrokes are not captured such as modifier keys like shift/ctrl/alt.
+Make sure to turn on `Grab all keyboard events` on the left hand side.
 You can also activate it by pressing `Control_R`
+
+#### Universal
+
+Open `localhost:6080/vnc_light.html` in your browser.
+
+*Key combinations may work properly if you use the in browser VNC client*
+
+### Running the Simulator
+
+[DWM Keybindings](https://github.com/FT-Autonomous/dwm) (keybindings for general use in the docker container)
+
+Open a terminal and then type in `source /utils/run-simulator.sh Silverstone`.
