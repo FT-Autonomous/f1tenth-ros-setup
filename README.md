@@ -235,7 +235,7 @@ You can also activate it by pressing `Control_R`
 
 #### Universal
 
-Open `localhost:6080/vnc_light.html` in your browser.
+Open `localhost:6080/vnc_lite.html` in your browser.
 Enter the password `f1tenth` when prompted.
 
 *Key combinations may work properly if you use the in browser VNC client*
