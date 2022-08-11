@@ -2,12 +2,14 @@ version: '3'
 
 services:
   f1tenth-ros:
+    user: root
     build:
       context: .
       dockerfile: Dockerfile
     stdin_open: true
     volumes:
-      - ./compose/vnc/setup.sh:/setup.sh
+      - ./utils:/utils
+      - ./utils/setup-vnc.sh:/setup.sh
     ports:
       - 5900:5900 
       - 6080:6080

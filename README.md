@@ -75,10 +75,10 @@ docker compose build
 This step will ensure the build has worked by running a container. Later we will run the simulator in this container.
 
 ```
-docker compose run f1tenth-ros
+docker compose run f1tenth-ros bash
 ```
 
-You should see your terminal display something like
+You should see your terminal display something like:
 
 ```
 root@...:/#
@@ -203,7 +203,7 @@ chmod +x <filepath>
 First, run the container with the VNC ports exposed.
 
 ```
-docker compose run -p 5900:5900 -p 6080:6080 f1tenth-ros sh setup.sh
+docker compose run --rm --service-ports f1tenth-ros
 ```
 
 ### Connecting to the Docker Container Using a VNC Client
@@ -213,7 +213,7 @@ There is a universal method, though you will have a better experience using a de
 #### MacOS
 
 MacOS comes with a built in VNC client.
-Once the docker container is running, you can open it using `open vnc://localhost:5900`.
+Once the docker container is running, you can open it using `open vnc://root:f1tenth@localhost:5900`.
 
 #### Linux
 
@@ -227,7 +227,7 @@ A VNC client can be installed called remmina:
        * Make sure to update USE flag for package to include the `vnc` USE Flag
        * `sudo emerge net-misc/remmina net-libs/libvncserver`
 
-Create a new connection to `localhost:5900` using the VNC plugin.
+Create a new connection to `localhost:5900` with the password `f1tenth` using the VNC plugin.
 
 On Remmina if some keystrokes are not captured such as modifier keys like shift/ctrl/alt.
 Make sure to turn on `Grab all keyboard events` on the left hand side.
@@ -236,6 +236,7 @@ You can also activate it by pressing `Control_R`
 #### Universal
 
 Open `localhost:6080/vnc_light.html` in your browser.
+Enter the password `f1tenth` when prompted.
 
 *Key combinations may work properly if you use the in browser VNC client*
 
@@ -244,3 +245,13 @@ Open `localhost:6080/vnc_light.html` in your browser.
 [DWM Keybindings](https://github.com/FT-Autonomous/dwm) (keybindings for general use in the docker container)
 
 Open a terminal and then type in `source /utils/run-simulator.sh Silverstone`.
+
+## Enabling the Container to display GUIs on the host machine using rocker (Linux)
+
+Rocker integrates much better with the host machine than a VNC client.
+
+First, install [Rocker](https://github.com/osrf/rocker), then after you have built your image (step 3), run the following command in your Terminal to run the Docker image:
+
+```
+rocker [optional: --nvidia or --devices /dev/dri/card0] --x11 <image name>
+```
