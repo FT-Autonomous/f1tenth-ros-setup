@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  f1tenth-ros:
+  f1tenth-ros: &f1tenth-ros
     user: root
     build:
       context: .
@@ -13,3 +13,7 @@ services:
     ports:
       - 5900:5900 
       - 6080:6080
+
+  f1tenth-ros-vnc:
+    <<: *f1tenth-ros
+    entrypoint: /setup.sh

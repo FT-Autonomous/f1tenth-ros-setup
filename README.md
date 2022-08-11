@@ -16,32 +16,35 @@ A simplified setup and workspace for using F1Tenth with ROS and Docker.
 
 ### Linux
 
-* Make sure to sync packages before installing new packages
-* [git](https://www.atlassian.com/git/tutorials/install-git)
-    * Debian based
-        * `sudo apt update` (syncing packages)
-        * `sudo apt install git`
-    * Arch based
-        * `sudo pacman -Sy` (syncing packages)
-        * `sudo pacman -S git` 
-    * Gentoo based
-        * `sudo emerge --sync` (syncing packages)
-        * `sudo emerge git`
-    
-* [Docker](https://www.docker.com/products/docker-desktop) 
-    * [Debian based](https://docs.docker.com/engine/install/ubuntu/)
-        * See [here](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-20-04) for instructions on how to install docker compose on ubuntu.
-    * [Arch based](https://wiki.archlinux.org/title/Docker) 
-        * `sudo pacman -S yay base-devel`
-        * `yay -S docker-git docker-compose`
-    * [Gentoo based](https://wiki.gentoo.org/wiki/Docker) 
-        * `sudo emerge app-containers/docker app-containers/docker-cli app-containers/docker-compose`
+Make sure to sync packages before installing new packages
 
-#### Systemd based - Debian/Arch etc
+#### Git - <https://www.atlassian.com/git/tutorials/install-git>
+
+* Debian based
+  * `sudo apt update` (syncing packages)
+  * `sudo apt install git`
+* Arch based
+  * `sudo pacman -Sy` (syncing packages)
+  * `sudo pacman -S git` 
+* Gentoo based
+  * `sudo emerge --sync` (syncing packages)
+  * `sudo emerge git`
+    
+#### Docker - <https://www.docker.com/products/docker-desktop>
+
+* [Debian based](https://docs.docker.com/engine/install/ubuntu/)
+  * See [here](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-20-04) for instructions on how to install docker compose on ubuntu.
+* [Arch based](https://wiki.archlinux.org/title/Docker) 
+  * `sudo pacman -S yay base-devel`
+  * `yay -S docker-git docker-compose`
+* [Gentoo based](https://wiki.gentoo.org/wiki/Docker) 
+  * `sudo emerge app-containers/docker app-containers/docker-cli app-containers/docker-compose`
+
+#### Starting the Docker daemon
+
+##### Systemd based - Debian/Ubuntu/Arch etc
 * `sudo systemctl enable docker`
 * `sudo systemctl start docker`
-
-#### Init Systems 
 
 ##### OpenRC - Gentoo
 * `sudo rc-update add docker`
@@ -75,7 +78,7 @@ docker compose build
 This step will ensure the build has worked by running a container. Later we will run the simulator in this container.
 
 ```
-docker compose run f1tenth-ros bash
+docker compose run f1tenth-ros
 ```
 
 You should see your terminal display something like:
@@ -203,7 +206,7 @@ chmod +x <filepath>
 First, run the container with the VNC ports exposed.
 
 ```
-docker compose run --rm --service-ports f1tenth-ros
+docker compose run --rm --service-ports f1tenth-ros-vnc
 ```
 
 ### Connecting to the Docker Container Using a VNC Client
