@@ -5,38 +5,46 @@ A simplified setup and workspace for using F1Tenth with ROS and Docker.
 ## Prerequisites
 
 ### Windows/Mac
+
 * [git](https://www.atlassian.com/git/tutorials/install-git)
 * [Docker Desktop](https://www.docker.com/products/docker-desktop)
+* [Docker Compose](https://docs.docker.com/compose/install/)
 
 ### Editor 
+
 * [Visual Studio Code](https://www.toolsqa.com/blogs/install-visual-studio-code/) (unless you have some other preference)
 
 ### Linux
-* Make sure to sync packages before installing new packages
-* [git](https://www.atlassian.com/git/tutorials/install-git)
-    * Debian based
-        * `sudo apt update` (syncing packages)
-        * `sudo apt install git`
-    * Arch based
-        * `sudo pacman -Sy` (syncing packages)
-        * `sudo pacman -S git` 
-    * Gentoo based
-        * `sudo emerge --sync` (syncing packages)
-        * `sudo emerge git`
-    
-* [Docker](https://www.docker.com/products/docker-desktop) 
-    * [Debian based](https://docs.docker.com/engine/install/ubuntu/)
-    * [Arch based](https://wiki.archlinux.org/title/Docker) 
-        * `sudo pacman -S yay base-devel`
-        * `yay -S docker-git`
-    * [Gentoo based](https://wiki.gentoo.org/wiki/Docker) 
-        * `sudo emerge app-containers/docker app-containers/docker-cli`
 
-#### Systemd based - Debian/Arch etc
+Make sure to sync packages before installing new packages
+
+#### Git - <https://www.atlassian.com/git/tutorials/install-git>
+
+* Debian based
+  * `sudo apt update` (syncing packages)
+  * `sudo apt install git`
+* Arch based
+  * `sudo pacman -Sy` (syncing packages)
+  * `sudo pacman -S git` 
+* Gentoo based
+  * `sudo emerge --sync` (syncing packages)
+  * `sudo emerge git`
+    
+#### Docker - <https://www.docker.com/products/docker-desktop>
+
+* [Debian based](https://docs.docker.com/engine/install/ubuntu/)
+  * See [here](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-20-04) for instructions on how to install docker compose on ubuntu.
+* [Arch based](https://wiki.archlinux.org/title/Docker) 
+  * `sudo pacman -S yay base-devel`
+  * `yay -S docker-git docker-compose`
+* [Gentoo based](https://wiki.gentoo.org/wiki/Docker) 
+  * `sudo emerge app-containers/docker app-containers/docker-cli app-containers/docker-compose`
+
+#### Starting the Docker daemon
+
+##### Systemd based - Debian/Ubuntu/Arch etc
 * `sudo systemctl enable docker`
 * `sudo systemctl start docker`
-
-#### Init Systems 
 
 ##### OpenRC - Gentoo
 * `sudo rc-update add docker`
@@ -62,7 +70,7 @@ The build might take a while to load the first time you run it.
 
 ```
 cd f1tenth-ros-setup
-docker build -t f1tenth-ros .
+docker compose build
 ```
 
 #### 4. Run a Container
@@ -70,10 +78,10 @@ docker build -t f1tenth-ros .
 This step will ensure the build has worked by running a container. Later we will run the simulator in this container.
 
 ```
-docker run -it f1tenth-ros
+docker compose run f1tenth-ros
 ```
 
-You should see your terminal display something like
+You should see your terminal display something like:
 
 ```
 root@...:/#
@@ -193,48 +201,60 @@ chmod +x <filepath>
 
 * Having multiple terminals open can get confusing, luckily in VSCode you can rename each terminal to something more convenient: Right-click terminal name -> rename.
 
-## Enabling the container to display GUIs on the host machine (Windows)
+## Using the GUI within the Docker Container via VNC
 
-Prerequisite: Chocolatey must be installed on your computer.
-
-Warning: Some firewalls may block access so it might be necessary to disable your firewall when running the simulator.
-
-Open Windows Powershell as Administrator and install the `xming` package
+First, run the container with the VNC ports exposed.
 
 ```
-choco install xming
+docker compose run --rm --service-ports f1tenth-ros-vnc
 ```
 
-Open the XLaunch Application
+### Connecting to the Docker Container Using a VNC Client
 
-<img src="https://i.imgur.com/q6bDsQV.jpg" width="300">
+There is a universal method, though you will have a better experience using a dedicated VNC client.
 
-Follow the default settings for each step except the following
+#### MacOS
 
-<img src="https://i.imgur.com/zn3YArf.jpg" width="400">
+MacOS comes with a built in VNC client.
+Once the docker container is running, you can open it using `open vnc://root:f1tenth@localhost:5900`.
 
-Once the XLaunch setup is finished, find your local IP Address by entering an ipconfig command in your local terminal
+#### Linux
 
-```
-ipconfig
-```
+A VNC client can be installed called remmina:
 
-Your local IP should be found similarly to where its shown below (ignore the white marks)
+   * [Debian based](https://remmina.org/how-to-install-remmina/)
+      * It is not found in the apt repository but you can use snap/flatpaks or adding it to the apt repository
+   * Arch based
+       * `sudo pacman -S remmina libvncserver` 
+   * [Gentoo based](https://wiki.gentoo.org/wiki/USE_flag) (see more on how to use use flags)
+       * Make sure to update USE flag for package to include the `vnc` USE Flag
+       * `sudo emerge net-misc/remmina net-libs/libvncserver`
 
-<img src="https://i.imgur.com/JsNgYMO.jpg" width="400">
+Create a new connection to `localhost:5900` with the password `f1tenth` using the VNC plugin.
 
-Execute the setup-display script in the container passing your local IP Address as a parameter.
+On Remmina if some keystrokes are not captured such as modifier keys like shift/ctrl/alt.
+Make sure to turn on `Grab all keyboard events` on the left hand side.
+You can also activate it by pressing `Control_R`
 
-```
-source /utils/set-display.sh <Local IP Address>
-```
+#### Universal
 
-Now when you run the simulator you should see the display open in a new window.
+Open `localhost:6080/vnc_lite.html` in your browser.
+Enter the password `f1tenth` when prompted.
 
-### Enabling the Container to display GUIs on the host machine (Ubuntu, and other)
+*Key combinations may work properly if you use the in browser VNC client*
+
+### Running the Simulator
+
+[DWM Keybindings](https://github.com/FT-Autonomous/dwm) (keybindings for general use in the docker container)
+
+Open a terminal and then type in `source /utils/run-simulator.sh Silverstone`.
+
+## Enabling the Container to display GUIs on the host machine using rocker (Linux)
+
+Rocker integrates much better with the host machine than a VNC client.
 
 First, install [Rocker](https://github.com/osrf/rocker), then after you have built your image (step 3), run the following command in your Terminal to run the Docker image:
 
 ```
-rocker [optional: --nvidia or --devices /dev/dri/card0] --x11 docker-ros
+rocker [optional: --nvidia or --devices /dev/dri/card0] --x11 <image name>
 ```
